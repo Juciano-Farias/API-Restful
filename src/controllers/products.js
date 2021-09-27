@@ -31,7 +31,29 @@ function post(req,res) {
     })
 }
 
+async function put(req,res) {
+    const { id } = req.params
+
+
+    // Esta forma retorna o item que foi feito o update, o outro nao
+    const product = await ProductsModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
+
+    res.send({
+        messege: 'Success',
+        product
+    })
+    /* const product = await ProductsModel.findOne( { _id: id } )
+
+    await product.updateOne(req.body)
+
+    res.send({
+        message: 'Success att',
+        product,
+    })
+    */
+} 
 module.exports = {
     get,
     post,
+    put,
 }
